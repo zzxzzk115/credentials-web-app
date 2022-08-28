@@ -36,12 +36,10 @@ def send_email_handler(request):
             model = CredentialConfigForm(request.POST)
             if model.is_valid():
                 saved_model = model.save()
-                if not os.path.exists('credentials/static/caches/'):
-                    os.mkdir('credentials/static/caches/')
-                with open('credentials/static/caches/' + saved_model.left_logo_path, 'wb+') as des:
+                with open('credentials/static/CIimages/' + saved_model.left_logo_path, 'wb+') as des:
                     for chunk in request.FILES.get('left_logo_file').chunks():
                         des.write(chunk)
-                with open('credentials/static/caches/' + saved_model.right_logo_path, 'wb+') as des:
+                with open('credentials/static/CIimages/' + saved_model.right_logo_path, 'wb+') as des:
                     for chunk in request.FILES.get('right_logo_file').chunks():
                         des.write(chunk)
                 with open('credentials/static/pdfs/' + saved_model.pdf_file_path, 'wb+') as des:

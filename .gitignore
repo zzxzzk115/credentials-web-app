@@ -81,8 +81,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Caches
-caches/
+# Images
+CIimages/
+!CIimages/CSemail.gif
+!CIimages/TPnetwork2.gif
 
 # PDFs
 pdfs/
