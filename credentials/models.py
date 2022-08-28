@@ -8,8 +8,11 @@ class Credential(models.Model):
     access_transcript_from = models.TextField()
     user_email_address = models.EmailField()
     user_access_code = models.TextField()
-    left_logo_path = models.TextField()
-    right_logo_path = models.TextField()
+    part1_name1 = models.TextField()
+    part1_name2 = models.TextField()
+    part1_name3 = models.TextField()
+    part1_until_date = models.TextField()
+    school_logo_path = models.TextField()
     pdf_file_path = models.TextField()
 
 
@@ -17,8 +20,9 @@ class CredentialConfigForm(ModelForm):
     class Meta:
         model = Credential
         fields = ['base_url', 'credential_id', 'access_transcript_from',
-            'user_email_address', 'user_access_code',
-            'left_logo_path', 'right_logo_path', 'pdf_file_path']
+            'user_email_address', 'user_access_code', 'part1_name1',
+            'part1_name2', 'part1_name3', 'part1_until_date',
+            'school_logo_path', 'pdf_file_path']
 
 
 # class UserSubmitCredentialInfoForm(ModelForm):

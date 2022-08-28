@@ -89,3 +89,6 @@ CIimages/
 # PDFs
 pdfs/
 !pdfs/TEST ONLY.pdf
+
+# Backup files
+*.bak
