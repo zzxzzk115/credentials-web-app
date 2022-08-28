@@ -7,9 +7,9 @@ services:
       - ./data/db:/var/lib/postgresql/data
     env_file:
       - settings.env
+    restart: always 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:80
     volumes:
       - .:/code
     ports:
@@ -18,3 +18,5 @@ services:
       - settings.env
     depends_on:
       - db
+    command: python manage.py runserver 0.0.0.0:80 --insecure
+    restart: always 
