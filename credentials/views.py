@@ -104,7 +104,10 @@ def send_email_handler(request):
 
 
 def __send_part2_delay(*args, **kwargs):
-    sleep(5)
+    if settings.DEBUG:
+        sleep(5)
+    else:
+        sleep(5 * 60)
     print('Sending Part2...')
     saved_model = kwargs['model']
     # send_mail('CI-R52: PDF Transcript Notification Part2 - ' + saved_model.credential_id,

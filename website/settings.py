@@ -149,7 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Gophish Email
 GOPHISH_API_KEY = os.environ.get('GOPHISH_API_KEY')
 GOPHISH_HOST = os.environ.get('GOPHISH_HOST')
-SMTP_HOST = os.environ.get('DEFAULT_SMTP_HOST')
+SMTP_HOST = os.environ.get('SMTP_HOST')
 SMTP_USER_NAME = os.environ.get('SMTP_USER_NAME')
 SMTP_USER_PASSWORD = os.environ.get('SMTP_USER_PASSWORD')
 FROM_EMAIL = os.environ.get('FROM_EMAIL')
