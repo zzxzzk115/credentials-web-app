@@ -130,8 +130,8 @@ def __send_part2_delay(*args, **kwargs):
         saved_model.user_email_address,
         template_helper.get_rendered_html_native(open('credentials/email_templates/part2.html').read(),
                 { 
+                    'AccessFrom': saved_model.access_transcript_from,
                     'Name1': saved_model.part1_name1,
-                    'Name2': saved_model.part1_name2,
                     'LogoURL': saved_model.base_url + '/static/CIimages/' + saved_model.school_logo_path,
                     'AccessCode': saved_model.user_access_code
                 }),
