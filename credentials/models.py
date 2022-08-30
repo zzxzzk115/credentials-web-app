@@ -12,8 +12,10 @@ class Credential(models.Model):
     part1_name2 = models.TextField()
     part1_name3 = models.TextField()
     part1_until_date = models.TextField()
+    part1_university_website = models.TextField()
     school_logo_path = models.TextField()
     pdf_file_path = models.TextField()
+    email_send_interval = models.TextField()
 
 
 class CredentialConfigForm(ModelForm):
@@ -22,7 +24,8 @@ class CredentialConfigForm(ModelForm):
         fields = ['base_url', 'credential_id', 'access_transcript_from',
             'user_email_address', 'user_access_code', 'part1_name1',
             'part1_name2', 'part1_name3', 'part1_until_date',
-            'school_logo_path', 'pdf_file_path']
+            'part1_university_website', 'school_logo_path',
+            'pdf_file_path', 'email_send_interval']
 
 
 # class UserSubmitCredentialInfoForm(ModelForm):

@@ -73,13 +73,15 @@ def send_email_handler(request):
                     saved_model.user_email_address,
                     template_helper.get_rendered_html_native(open('credentials/email_templates/part1.html').read(),
                             { 
+                                'AccessFrom': saved_model.access_transcript_from,
                                 'Name1': saved_model.part1_name1,
                                 'Name2': saved_model.part1_name2,
                                 'Name3': saved_model.part1_name3,
                                 'Email': saved_model.user_email_address,
                                 'UntilDate': saved_model.part1_until_date,
                                 'LogoURL': saved_model.base_url + '/static/CIimages/' + saved_model.school_logo_path,
-                                'Link': saved_model.base_url + '/CGI-BIN/PDFCGI2.pgm?LOGONP' + saved_model.credential_id + saved_model.user_email_address
+                                'Link': saved_model.base_url + '/CGI-BIN/PDFCGI2.pgm?LOGONP' + saved_model.credential_id + saved_model.user_email_address,
+                                'Website': saved_model.part1_university_website
                             }),
                     None,
                     settings.SMTP_HOST,
@@ -104,12 +106,9 @@ def send_email_handler(request):
 
 
 def __send_part2_delay(*args, **kwargs):
-    if settings.DEBUG:
-        sleep(5)
-    else:
-        sleep(5 * 60)
+    saved_model : Credential = kwargs['model']
+    sleep(float(saved_model.email_send_interval))
     print('Sending Part2...')
-    saved_model = kwargs['model']
     # send_mail('CI-R52: PDF Transcript Notification Part2 - ' + saved_model.credential_id,
     #     None,
     #     None,
