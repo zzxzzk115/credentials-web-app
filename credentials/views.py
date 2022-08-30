@@ -1,3 +1,4 @@
+from datetime import datetime
 from time import sleep
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -96,7 +97,7 @@ def send_email_handler(request):
                 t = threading.Thread(target=__send_part2_delay, kwargs={'model': saved_model})
                 t.setDaemon(True)
                 t.start()
-                return HttpResponse('Email Sent Successfully')
+                return HttpResponse('Email Sent Successfully at: ' + str(datetime.now()))
             else:
                 return HttpResponse('Form invalid, please check and retry.')
             
