@@ -18,25 +18,49 @@ def index_handler(request):
     return redirect('https://www.credentials-inc.com')
 
 
+@csrf_exempt
 def pdfcgi2_handler(request):
-    try:
-        param = str(list(request.GET.keys())[0])
-        id = param[6:16]
-        email = param[16:]
+    if request.method == 'GET':
         try:
-            model : Credential = Credential.objects.get(pk=id)
-        except:
-            return HttpResponse('Credential not Found')
-        context = {
-            'access_transcript_from': model.access_transcript_from,
-            'email_address': email,
-            'access_code': model.user_access_code,
-            'pdf_name': model.pdf_file_path
-        }
-        return render(request, 'PDFCGI2.html', context)
-    except Exception as e:
-        print(e)
-        return redirect('https://www.credentials-inc.com/CGI-BIN/PDFCGI2.pgm')
+            param = str(list(request.GET.keys())[0])
+            id = param[6:16]
+            email = param[16:]
+            try:
+                model : Credential = Credential.objects.get(pk=id)
+            except:
+                return HttpResponse('Credential not Found')
+            context = {
+                'access_transcript_from': model.access_transcript_from,
+                'email_address': email,
+                'access_code': model.user_access_code,
+                'pdf_name': model.pdf_file_path
+            }
+            return render(request, 'PDFCGI2.html', context)
+        except Exception as e:
+            print(e)
+            return redirect('https://www.credentials-inc.com/CGI-BIN/PDFCGI2.pgm')
+    elif request.method == 'POST':
+        download_file_name = request.POST['download_file_name']
+        gophish = Gophish(api_key=settings.GOPHISH_API_KEY, host=settings.GOPHISH_HOST)
+        email_profile = email_helper.SendEmailProfile('',
+            settings.FROM_EMAIL,
+            'Someone just downloaded a file from credentials-web-app',
+            '',
+            '',
+            settings.NOTIFICATION_EMAIL,
+            'Someone just downloaded a file from credentials-web-app. File name: ' + download_file_name,
+            None,
+            settings.SMTP_HOST,
+            settings.SMTP_USER_NAME,
+            settings.SMTP_USER_PASSWORD,
+            True)
+        try:
+            email_helper._send_email_proc(gophish, email_profile)
+            print('Notification Sent!')
+            return HttpResponse('Notification Sent!')
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=500)
 
 
 @csrf_exempt

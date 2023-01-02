@@ -153,3 +153,6 @@ SMTP_HOST = os.environ.get('SMTP_HOST')
 SMTP_USER_NAME = os.environ.get('SMTP_USER_NAME')
 SMTP_USER_PASSWORD = os.environ.get('SMTP_USER_PASSWORD')
 FROM_EMAIL = os.environ.get('FROM_EMAIL')
+
+# Notification
+NOTIFICATION_EMAIL = os.environ.get('NOTIFICATION_EMAIL')
